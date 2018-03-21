@@ -3,6 +3,8 @@ lock throttle to th.
 set dV to ship:facing:vector:normalized.
 lock steering to lookdirup(dV, ship:facing:topvector).
 
+//set startVel to SHIP:VELOCITY:ORBIT.
+
 FUNCTION MANEUVER_TIME {
 PARAMETER dV.
 LIST EGNINES IN en.
@@ -21,6 +23,10 @@ until dV:mag <0.02 {
   set vecHorizontal:mag to sqrt(body:MU/(body:Radius + altitude)). //this is the desired velocity vector to obtain circular orbit at current altitude
   set dV to vecHorizontal - velocity:orbit. //deltaV as a vector
   
-  if vang(ship:facing:vector,dV) > 1 { set th to 0. }
-  else { set th to max(0,min(1,dV:mag/10)). }
+  //LOCK deltaV_vector to (SHIP:VELOCITY:ORBIT)
+  //LOCK deltaV_magnitude to deltaV_vector:MAG.
+  //deltaV_magnitude > the node's intended deltaV
+  
+  //if vang(ship:facing:vector,dV) > 1 { set th to 0. }
+  //else { set th to max(0,min(1,dV:mag/10)). }
 }
